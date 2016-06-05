@@ -3,11 +3,17 @@ document.addEventListener('DOMContentLoaded',function()
 	var converter = new Markdown.Converter();
 	var xhr = new XMLHttpRequest();
 	var DONE = this.DONE || 4;
-	xhr.onreadystatechange = function()
+	var readystatechange = function()
 	{
 		if(this.readyState === DONE && this.status === 200)
 		{
-			var list = document.getElementById('postlist');
+			document.getElementById('postparent').style.display = 'none';
+			document.getElementById('postlistparent').style.display = 'block';
+
+			var oldlist = document.getElementById('postlist');
+			var list = document.createElement('ul');
+			list.id = 'postlist';
+
 			var lines = xhr.responseText.split('\n');
 			lines.map(String.trim)
 				.filter(function(line)
@@ -32,9 +38,10 @@ document.addEventListener('DOMContentLoaded',function()
 						{
 							if(this.readyState === DONE && this.status === 200)
 							{
-								document.getElementById('backlink').style.display = 'block';
-								var center = document.getElementById('post');
-								center.innerHTML = converter.makeHtml(xhr.responseText);
+								var post = document.getElementById('post');
+								post.innerHTML = converter.makeHtml(xhr.responseText);
+								document.getElementById('postparent').style.display = 'block';
+								document.getElementById('postlistparent').style.display = 'none';
 							}
 						};
 						xhr.open('GET',file,true);
@@ -45,9 +52,21 @@ document.addEventListener('DOMContentLoaded',function()
 					li.appendChild(link);
 					list.appendChild(li);
 				});
+
+			document.getElementById('postlistparent').replaceChild(list,oldlist);
 		}
 	}
+	xhr.onreadystatechange = readystatechange;
 	xhr.open('GET','posts.txt',true);
 	xhr.send();
+
+	document.getElementById('backlink').onclick = function()
+	{
+		document.getElementById('post').innerHTML = '';
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = readystatechange;
+		xhr.open('GET','posts.txt',true);
+		xhr.send();
+	};
 });
 

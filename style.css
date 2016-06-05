@@ -1,0 +1,42 @@
+body
+{
+	background-color:#040404;
+	font-size:17px;
+	line-height:19px;
+}
+
+.container > .row
+{
+	margin:0 5px;
+}
+
+#title
+{
+	margin-top:15px;
+	width:100%;
+	border-radius:5px;
+	line-height:1.3em;
+}
+
+#center
+{
+	width: 100%;
+	margin-top:1.25%;
+	padding:1%;
+	border-radius:10px;
+	background-color:#181818;
+	color:#aaa;
+	text-align:justify;
+}
+
+#center [href]
+{
+	text-decoration:none;
+	color:#666;
+}
+
+#center [href]:visited
+{
+	color:#666;
+}
+

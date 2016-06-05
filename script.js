@@ -15,7 +15,11 @@ document.addEventListener('DOMContentLoaded',function()
 			list.id = 'postlist';
 
 			var lines = xhr.responseText.split('\n');
-			lines.map(String.trim)
+			lines
+				.map(function(line)
+				{
+					return line.trim();
+				})
 				.filter(function(line)
 				{
 					return line.length > 0;

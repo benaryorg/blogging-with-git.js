@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded',function()
 {
-	var DONE = this.DONE || 4;
 	var converter = window.markdownit
 	({
 		highlight: function(str,lang)
@@ -23,10 +22,12 @@ document.addEventListener('DOMContentLoaded',function()
 
 	var loadpost = function(file)
 	{
-		var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function()
-		{
-			if(this.readyState === DONE && this.status === 200)
+		fetch(decodeURIComponent(file))
+			.then(function(response)
+			{
+				return response.text();
+			})
+			.then(function(text)
 			{
 				var oldcenter = document.getElementById('center');
 				var newcenter = document.createElement('div');
@@ -42,33 +43,32 @@ document.addEventListener('DOMContentLoaded',function()
 					return false;
 				};
 
-				post.innerHTML = converter.render(xhr.responseText);
+				post.innerHTML = converter.makeHtml(text);
 
 				newcenter.id = 'center';
 				newcenter.appendChild(backlink);
 				newcenter.appendChild(post);
 
 				oldcenter.replaceWith(newcenter);
-			}
-		};
-		xhr.open('GET',decodeURIComponent(file),true);
-		xhr.send();
+			});
 		return false;
 	};
 
 	var loadpostlist = function()
 	{
-		var recvposts = function()
-		{
-			if(this.readyState === DONE && this.status === 200)
+		fetch('posts.txt')
+			.then(function(response)
+			{
+				return response.text();
+			})
+			.then(function(text)
 			{
 				var oldcenter = document.getElementById('center');
 				var newcenter = document.createElement('div');
 				var header = document.createElement('h1');
 				var list = document.createElement('ul');
 
-				var lines = xhr.responseText.split('\n');
-				lines
+				text.split('\n')
 					.map(function(line)
 					{
 						return line.trim();
@@ -105,13 +105,7 @@ document.addEventListener('DOMContentLoaded',function()
 				newcenter.appendChild(header);
 				newcenter.appendChild(list);
 				oldcenter.replaceWith(newcenter);
-			}
-		}
-
-		var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = recvposts;
-		xhr.open('GET','posts.txt',true);
-		xhr.send();
+			});
 		return false;
 	};
 

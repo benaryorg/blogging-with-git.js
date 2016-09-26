@@ -10,19 +10,21 @@ document.addEventListener('DOMContentLoaded',function()
 		{
 			if(this.readyState === DONE && this.status === 200)
 			{
-				var center = document.getElementById('center');
+				var oldcenter = document.getElementById('center');
+				var newcenter = document.createElement('div');
 				var backlink = document.createElement('a');
 				var post = document.createElement('div');
-
-				center.innerHTML = '';
 
 				backlink.href = '.';
 				backlink.innerText = 'Back to Posts';
 
 				post.innerHTML = converter.makeHtml(xhr.responseText);
 
-				center.appendChild(backlink);
-				center.appendChild(post);
+				newcenter.id = 'center';
+				newcenter.appendChild(backlink);
+				newcenter.appendChild(post);
+
+				oldcenter.replaceWith(newcenter);
 			}
 		};
 		xhr.open('GET',file,true);
@@ -36,8 +38,9 @@ document.addEventListener('DOMContentLoaded',function()
 		{
 			if(this.readyState === DONE && this.status === 200)
 			{
+				var oldcenter = document.getElementById('center');
+				var newcenter = document.createElement('div');
 				var header = document.createElement('h1');
-				header.innerText = 'Blog Posts:';
 				var list = document.createElement('ul');
 
 				var lines = xhr.responseText.split('\n');
@@ -71,10 +74,13 @@ document.addEventListener('DOMContentLoaded',function()
 						list.appendChild(li);
 					});
 
-				var center = document.getElementById('center');
-				center.innerHTML = '';
-				center.appendChild(header);
-				center.appendChild(list);
+				header.innerText = 'Blog Posts:';
+
+				newcenter.id = 'center';
+				newcenter.innerHTML = '';
+				newcenter.appendChild(header);
+				newcenter.appendChild(list);
+				oldcenter.replaceWith(newcenter);
 			}
 		}
 

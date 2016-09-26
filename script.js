@@ -59,10 +59,12 @@ document.addEventListener('DOMContentLoaded',function()
 						var li = document.createElement('li');
 						var link = document.createElement('a');
 
-						link.href = '?post='+encodeURIComponent(file);
+						link.href = '#'+encodeURIComponent(file);
 						link.innerText = title;
 						link.onclick = function()
 						{
+							window.location.href = link.href;
+							window.location.reload();
 						};
 
 						li.appendChild(link);
@@ -83,22 +85,13 @@ document.addEventListener('DOMContentLoaded',function()
 		return false;
 	};
 
-	var index = window.location.href.indexOf('?post=');
-	if(index == -1)
+	if(window.location.hash === "" || window.location.hash === "#")
 	{
 		loadpostlist();
 	}
 	else
 	{
-		var post = window.location.href.substr(index+6);
-		if(post != '')
-		{
-			loadpost(post);
-		}
-		else
-		{
-			loadpostlist();
-		}
+		loadpost(window.location.hash.substr(1));
 	}
 });
 

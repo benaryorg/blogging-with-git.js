@@ -17,6 +17,11 @@ document.addEventListener('DOMContentLoaded',function()
 
 				backlink.href = '.';
 				backlink.innerText = 'Back to Posts';
+				backlink.onclick = function()
+				{
+					loadpostlist();
+					return false;
+				};
 
 				post.innerHTML = converter.makeHtml(xhr.responseText);
 
@@ -67,7 +72,7 @@ document.addEventListener('DOMContentLoaded',function()
 						link.onclick = function()
 						{
 							window.location.href = link.href;
-							window.location.reload();
+							loadpost(encodeURIComponent(file));
 						};
 
 						li.appendChild(link);

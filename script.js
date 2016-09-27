@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded',function()
 				oldcenter.replaceWith(newcenter);
 			}
 		};
-		xhr.open('GET',file,true);
+		xhr.open('GET',decodeURIComponent(file),true);
 		xhr.send();
 		return false;
 	};

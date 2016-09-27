@@ -15,10 +15,11 @@ document.addEventListener('DOMContentLoaded',function()
 				var backlink = document.createElement('a');
 				var post = document.createElement('div');
 
-				backlink.href = '.';
+				backlink.href = '#';
 				backlink.innerText = 'Back to Posts';
 				backlink.onclick = function()
 				{
+					window.location.href = backlink.href;
 					loadpostlist();
 					return false;
 				};

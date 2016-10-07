@@ -7,14 +7,14 @@ struct Whatever
 	data: bool,
 }
 
-fn foo(x: &mut u64) -> bool
+fn foo(&mut x: &mut u64) -> bool
 {
-	x.cmp(5)
+	x.eq(&5)
 }
 
 fn main()
 {
-	let a = 6;
+	let mut a = 6;
 	let x = Whatever
 	{
 		data: foo(&mut a),

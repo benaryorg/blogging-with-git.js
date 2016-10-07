@@ -1,6 +1,22 @@
 document.addEventListener('DOMContentLoaded',function()
 {
-	var converter = new Markdown.Converter();
+	var converter = window.markdownit
+	({
+		highlight: function(str,lang)
+		{
+			if(lang && hljs.getLanguage(lang))
+			{
+				try
+				{
+					return hljs.highlight(lang,str).value;
+				}
+				catch(__)
+				{
+				}
+			}
+			return '';
+		}
+	});
 	var DONE = this.DONE || 4;
 
 	var loadpost = function(file)
@@ -24,7 +40,7 @@ document.addEventListener('DOMContentLoaded',function()
 					return false;
 				};
 
-				post.innerHTML = converter.makeHtml(xhr.responseText);
+				post.innerHTML = converter.render(xhr.responseText);
 
 				newcenter.id = 'center';
 				newcenter.appendChild(backlink);

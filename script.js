@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded',function()
 			}
 			return '';
 		}
-	});
+	})
+		.use(window.markdownitAbbr)
+		.use(window.markdownitFootnote);
 
 	var loadpost = function(file)
 	{

@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded',function()
 				newcenter.appendChild(backlink);
 				newcenter.appendChild(post);
 
-				oldcenter.replaceWith(newcenter);
+				oldcenter.parentElement.replaceChild(newcenter,oldcenter);
 			}
 		};
 		xhr.open('GET',decodeURIComponent(file),true);
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded',function()
 				newcenter.innerHTML = '';
 				newcenter.appendChild(header);
 				newcenter.appendChild(list);
-				oldcenter.replaceWith(newcenter);
+				oldcenter.parentElement.replaceChild(newcenter,oldcenter);
 			}
 		}
 

@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded',function()
 {
+	var DONE = this.DONE || 4;
 	var converter = window.markdownit
 	({
 		highlight: function(str,lang)
@@ -17,7 +18,6 @@ document.addEventListener('DOMContentLoaded',function()
 			return '';
 		}
 	});
-	var DONE = this.DONE || 4;
 
 	var loadpost = function(file)
 	{

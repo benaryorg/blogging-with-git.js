@@ -5,11 +5,6 @@ body
 	line-height:19px;
 }
 
-.container > .row
-{
-	margin:0 5px;
-}
-
 #title
 {
 	margin-top:15px;

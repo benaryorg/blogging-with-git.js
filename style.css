@@ -20,19 +20,19 @@ body
 	padding: 1%;
 	border-radius: 10px;
 	background-color: #181818;
-	color: #aaa;
+	color: #ddd;
 	text-align: justify;
 }
 
 #center [href]
 {
 	text-decoration: none;
-	color: #666;
+	color: #888;
 }
 
 #center [href]:visited
 {
-	color: #666;
+	color: #888;
 }
 }
 

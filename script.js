@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded',function()
 				var post = document.createElement('div');
 
 				backlink.href = '#';
-				backlink.innerText = 'Back to Posts';
+				backlink.innerHTML = 'Back to Posts';
 				backlink.onclick = function()
 				{
 					window.location.href = backlink.href;
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded',function()
 						var link = document.createElement('a');
 
 						link.href = '#'+encodeURIComponent(file);
-						link.innerText = title;
+						link.innerHTML = title;
 						link.onclick = function()
 						{
 							window.location.href = link.href;
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded',function()
 						list.appendChild(li);
 					});
 
-				header.innerText = 'Blog Posts:';
+				header.innerHTML = 'Blog Posts:';
 
 				newcenter.id = 'center';
 				newcenter.innerHTML = '';

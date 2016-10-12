@@ -34,5 +34,10 @@ body
 {
 	color: #888;
 }
+
+table,tr
+{
+	width: 100%;
+	border: 1px solid #999;
 }
 
